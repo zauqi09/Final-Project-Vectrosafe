@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="#142585"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="120dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_bg3"
+        android:backgroundTint="#00BCD4" >
+        <TextView
+            android:id="@+id/saldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"
+            android:layout_margin="10dp"
+            android:layout_alignParentBottom="true"
+            android:text="MyPhone. Powered By BTPNS"
+            android:layout_marginLeft="50dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="120dp"
+        android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/round_bg4"
+        android:backgroundTint="#00BCD4" >
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="11dp"
+            android:text="My Phone"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_centerbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:backgroundTint="#FF1100"
+            android:layout_toLeftOf="@id/view6"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/round_bg">
+            <TextView
+                android:id="@+id/tv_nomorhp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textStyle="bold"
+                android:textSize="30sp"
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="30dp"
+                android:text="null"/>
+
+            <TextView
+                android:id="@+id/tv_pulsa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_nomorhp"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:text="null"/>
+
+            <TextView
+                android:id="@+id/tv_masa_aktif"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_below="@id/tv_operator"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:text="null"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/view5"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginEnd="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/round_bg3"
+                android:backgroundTint="#FF9800" >
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_operator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="18dp"
+                android:text="null"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <View
+            android:id="@+id/view6"
+            android:layout_width="30dp"
+            android:layout_height="300dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/round_botleftt"
+            android:backgroundTint="#FF9800" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

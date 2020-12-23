@@ -1,0 +1,4 @@
+com\vectrosafe\RabbitMQ\RestApiRecv.class
+com\vectrosafe\Controller\RestApiController.class
+com\vectrosafe\RabbitMQ\RestApiSend.class
+com\vectrosafe\RestApiMain.class

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="@drawable/bg_strokes2"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/transaksiLl"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/no_transaksi"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:singleLine="true"
+            android:text="no_transaksi"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_tipe"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:text="tipe"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_mutasi"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="mutasi"
+            android:layout_marginRight="2dp"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_saldo"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="saldo"
+            android:layout_marginRight="2dp"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_waktu"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:text="waktu"
+            android:layout_marginRight="2dp"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_keterangan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="keterangan"
+            android:layout_marginRight="2dp"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

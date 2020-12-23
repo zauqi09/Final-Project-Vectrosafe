@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/round_bg3"
+        android:backgroundTint="#FFC107" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/round_bg2"
+        android:backgroundTint="#FFC107" />
+
+    <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_centerInParent="false">
+
+       <androidx.appcompat.widget.AppCompatTextView
+           android:id="@+id/textRegister_reg"
+           android:layout_margin="20dp"
+           android:layout_height="wrap_content"
+           android:layout_width="wrap_content"
+           android:textStyle="bold"
+           android:textSize="30sp"
+           android:layout_centerHorizontal="true"
+           android:text="Registrasi"
+           />
+       <View
+           android:id="@+id/divider_reg"
+           android:layout_width="match_parent"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:layout_height="2dp"
+           android:layout_below="@id/textRegister_reg"
+           android:background="#B6B6B6" />
+
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_username_reg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/divider_reg"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:hint="@string/username"/>
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_fullname_reg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/et_username_reg"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:hint="Nama Lengkap"/>
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_password_reg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:inputType="textPassword"
+           android:layout_below="@id/et_fullname_reg"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:hint="@string/password"/>
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_passwordConfirm_reg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:inputType="textPassword"
+           android:layout_below="@id/et_password_reg"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:hint="Confirm Password"/>
+       <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+           android:id="@+id/Ll_datepicker"
+           android:orientation="horizontal" android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/et_passwordConfirm_reg">
+
+
+           <Button
+               android:id="@+id/bt_datepicker"
+               android:text="Tanggal"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="20dp"
+               android:background="@drawable/round_bg"
+               app:backgroundTint="#00BCD4"
+               android:layout_marginBottom="20dp"/>
+
+           <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/et_tanggallahir"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+
+               android:layout_marginLeft="20dp"
+               android:layout_marginRight="20dp"
+               android:layout_marginBottom="20dp"
+               android:hint="Tanggal Lahir"/>
+
+       </LinearLayout>
+
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_no_hp_reg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/Ll_datepicker"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:hint="No Handphone"/>
+       <com.google.android.material.textfield.TextInputEditText
+           android:id="@+id/et_alamat_reg"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/et_no_hp_reg"
+           android:layout_marginLeft="20dp"
+           android:layout_marginRight="20dp"
+           android:layout_marginBottom="20dp"
+           android:hint="Alamat"/>
+   </RelativeLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/bt_Register_reg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/tv_version"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:text="Register"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:background="@drawable/round_bg"
+        app:backgroundTint="#00BCD4"
+        android:paddingBottom="10dp"
+        android:textAllCaps="false"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vectrosafe 1.0.0"
+        android:textColor="@color/black"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

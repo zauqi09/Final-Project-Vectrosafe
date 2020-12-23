@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">android-login-splash</string>
+    <string name="register">Register sekarang yuk!</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="copyright">vectrogamers.com</string>
+</resources>
