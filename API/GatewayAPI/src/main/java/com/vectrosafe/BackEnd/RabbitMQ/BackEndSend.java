@@ -16,13 +16,15 @@ public class BackEndSend {
         factory.setPassword("iggamingcs");
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel() ){
-            System.out.println("send_message : "+sendString);
+            System.out.println("send_message : "+sendString+ ", Queue : "+declare);
             channel.queueDeclare(declare, false, false, false, null);
             channel.basicPublish("", declare, null, sendString.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e){
-            System.out.println("Error : "+e);
+            System.out.println("Erro'r : "+e);
         }
     }
+
+    public void response_loginNasabah(String message) { connectRabbitMQ(message, "android_response_loginNasabah");}
     public void response_addTrx(String message) {
         connectRabbitMQ(message, "android_response_addTrx");
     }
@@ -43,6 +45,5 @@ public class BackEndSend {
         connectRabbitMQ(message, "android_response_getXL");
     }
     public void response_buyVoucher(String message) { connectRabbitMQ(message, "android_response_buyVoucher"); }
-    public void response_loginNasabah(String message) { connectRabbitMQ(message, "android_response_loginNasabah");}
 //    public void response_verifyJWT(String message) { connectRabbitMQ(message, "android_response_verifyJWT");}
 }

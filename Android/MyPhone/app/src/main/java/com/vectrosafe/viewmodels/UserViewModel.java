@@ -4,8 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.vectrosafe.model.GetRequest;
-import com.vectrosafe.model.Response.ApiResponse;
+import com.vectrosafe.model.ApiResponse;
 import com.vectrosafe.networking.UserRepository;
 
 
@@ -21,11 +20,11 @@ public class UserViewModel extends ViewModel {
     }
 
 
-    public LiveData<ApiResponse> getUser(GetRequest get) {
+    public LiveData<ApiResponse> getUser(String no_hp, String operator) {
         if (mutableLiveData == null) {
             usersRepository = UserRepository.getInstance();
         }
-        mutableLiveData = usersRepository.getUser(get);
+        mutableLiveData = usersRepository.getUser(no_hp,operator);
 
         return mutableLiveData;
     }

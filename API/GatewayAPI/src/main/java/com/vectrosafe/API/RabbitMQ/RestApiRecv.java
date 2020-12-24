@@ -22,7 +22,7 @@ public class RestApiRecv {
             channel.queueDeclare(declare, false, false, false, null);
             DeliverCallback deliverCallback = (consumerTag, delivery) -> {
                 String deliver = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                System.out.println("RabbitMQ message : " + deliver);
+                System.out.println("RabbitMQ message : " + deliver + " Queue : " + declare);
                 messageRecv_resp = deliver;
             };
             channel.basicConsume(declare, true, deliverCallback, consumerTag -> {

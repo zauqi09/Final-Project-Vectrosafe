@@ -71,32 +71,31 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textStyle="bold"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:layout_marginTop="60dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="18dp"
                 android:text="null"/>
 
             <TextView
                 android:id="@+id/tv_pulsa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_nomorhp"
+                android:layout_below="@+id/tv_masa_aktif"
                 android:textStyle="bold"
-                android:textSize="24sp"
+                android:textSize="20sp"
                 android:layout_marginTop="10dp"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="18dp"
                 android:text="null"/>
 
             <TextView
                 android:id="@+id/tv_masa_aktif"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
                 android:textStyle="bold"
-                android:textSize="24sp"
-                android:layout_below="@id/tv_operator"
+                android:textSize="15sp"
+                android:layout_below="@id/tv_nomorhp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginStart="18dp"
                 android:text="null"/>
 
             <LinearLayout
@@ -116,7 +115,7 @@
                 android:layout_margin="18dp"
                 android:text="null"
                 android:textColor="@color/white"
-                android:textSize="22sp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
         </RelativeLayout>
         <View

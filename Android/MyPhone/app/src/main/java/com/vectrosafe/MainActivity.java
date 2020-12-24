@@ -3,15 +3,17 @@ package com.vectrosafe;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.vectrosafe.model.GetRequest;
 import com.vectrosafe.model.NomorHP;
-import com.vectrosafe.model.Response.ApiResponse;
 import com.vectrosafe.viewmodels.UserViewModel;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,10 +43,17 @@ public class MainActivity extends AppCompatActivity {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init();
         initViewData();
-
     }
 
     void initViewData(){
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+
         Bundle bundle = getIntent().getExtras();
         operator=bundle.getString("operator","");
         nomorhp=bundle.getString("no_hp","");
@@ -54,18 +63,23 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        userViewModel.getUser(new GetRequest(nomorhp,operator)).observe(this, userResponse -> {
+        userViewModel.getUser(nomorhp,operator).observe(this, userResponse -> {
             try {
-                Thread.sleep(2000);
+                while (userResponse==null){
+                    Thread.sleep(10);
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             progressDialog.dismiss();
             user = userResponse.getData();
-            tv_masa_aktif.setText(user.getMasa_aktif().toString());
+            String pattern = "MM-dd-yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(user.getMasa_aktif());
+            tv_masa_aktif.setText("Aktif Sampai : "+date);
             tv_operator.setText(operator);
-            tv_pulsa.setText(user.getPulsa().toString());
-            tv_nomorhp.setText(nomorhp);
+            tv_pulsa.setText("Pulsa : "+kursIndonesia.format(user.getPulsa()));
+            tv_nomorhp.setText("Nomor : "+nomorhp);
         });
     }
 

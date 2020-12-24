@@ -189,24 +189,24 @@ public class DatabaseController {
             while (response2==null){
                 TimeUnit.MILLISECONDS.sleep(10);
             }
-            String trx3 = "{\"id_produk\" : "+order.getId_produk()+" ,\"no_hp\" : \""+order.getNo_hp()+"\" }";
-            MediaType mediaType3 = MediaType.parse("application/json");
-            RequestBody body3 = RequestBody.create(mediaType3, trx3 );
-            Request request3 = new Request.Builder()
-                    .url("http://localhost:9027/operatorpulsa/"+order.getOperator()+"/isipulsa")
-                    .method("PUT", body3)
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            Response response3 = client.newCall(request3).execute();
-            while (response3==null){
-                TimeUnit.MILLISECONDS.sleep(10);
-            }
 
             String strResp = response2.body().string();
             Transaksi objtrx = new Gson().fromJson(strResp,Transaksi.class);
             ApiResponse objResponse = response("Buy Voucher Success",200,objtrx);
             String strResponse = new Gson().toJson(objResponse);
             response2.body().close();
+            String trx3 = "{\"id_produk\" : "+order.getId_produk()+" ,\"no_hp\" : \""+order.getNo_hp()+"\" }";
+            MediaType mediaType3 = MediaType.parse("application/json");
+            RequestBody body3 = RequestBody.create(mediaType3, trx3 );
+            Request request3 = new Request.Builder()
+                    .url("http://localhost:9027/operatorpulsa/"+order.getOperator()+"/isipulsa")
+                    .method("POST", body3)
+                    .addHeader("Content-Type", "application/json")
+                    .build();
+            Response response3 = client.newCall(request3).execute();
+            while (response3==null){
+                TimeUnit.MILLISECONDS.sleep(10);
+            }
             response3.body().close();
             sendMessage = strResponse;
             System.out.println(sendMessage);

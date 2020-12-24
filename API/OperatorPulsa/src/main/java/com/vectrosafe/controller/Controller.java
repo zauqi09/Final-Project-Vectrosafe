@@ -63,10 +63,10 @@ public class Controller {
         }
     }
 
-    @PostMapping("/getUser")
-    public ResponseEntity<?> getUser(@RequestBody GetRequest get){
-        if (get.getOperator().equals("Telkomsel")){
-            Optional<NomorTsel> tsel = isiPulsaTsel.findByNumber(get.getNo_hp());
+    @GetMapping("/getUser/{operator}-{nomor}")
+    public ResponseEntity<?> getUser(@PathVariable("nomor") String nomor, @PathVariable("operator") String operator){
+        if (operator.equals("Telkomsel")){
+            Optional<NomorTsel> tsel = isiPulsaTsel.findByNumber(nomor);
             if (tsel.isPresent()) {
                 System.out.print(tsel.get().getMasa_aktif());
                 ApiResponse apiresp = new ApiResponse();
@@ -77,8 +77,8 @@ public class Controller {
             }else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-        } else if (get.getOperator().equals("XL")){
-            Optional<NomorXL> xl = isiPulsaXL.findByNumber(get.getNo_hp());
+        } else if (operator.equals("XL")){
+            Optional<NomorXL> xl = isiPulsaXL.findByNumber(nomor);
             if (xl.isPresent()) {
                 System.out.print(xl.get().getMasa_aktif());
                 ApiResponse apiresp = new ApiResponse();
@@ -94,38 +94,6 @@ public class Controller {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
-    @GetMapping("/Telkomsel/get/{nomor}")
-    public ResponseEntity<?> getnomorTelkomsel(@PathVariable("nomor") String nomor){
-        Optional<NomorTsel> tsel = isiPulsaTsel.findByNumber(nomor);
-
-        if (tsel.isPresent()) {
-            System.out.print(tsel.get().getMasa_aktif());
-            ApiResponse apiresp = new ApiResponse();
-            apiresp.setData(tsel.get());
-            apiresp.setMessage("Success");
-            apiresp.setStatus(200);
-            return new ResponseEntity<>(apiresp, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    @GetMapping("/XL/get/{nomor}")
-    public ResponseEntity<?> getnomorXL(@PathVariable("nomor") String nomor){
-        Optional<NomorXL> xl = isiPulsaXL.findByNumber(nomor);
-        if (xl.isPresent()) {
-            System.out.print(xl.get().getMasa_aktif());
-            ApiResponse apiresp = new ApiResponse();
-            apiresp.setData(xl.get());
-            apiresp.setMessage("Success");
-            apiresp.setStatus(200);
-            return new ResponseEntity<>(apiresp, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
     @PostMapping("/Telkomsel/isipulsa")
     public ResponseEntity<NomorTsel> isiTelkomsel(@RequestBody IsiPulsaRequest request){
         IsiPulsaRequest isireq = request;

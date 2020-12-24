@@ -4,8 +4,7 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.vectrosafe.model.GetRequest;
-import com.vectrosafe.model.Response.ApiResponse;
+import com.vectrosafe.model.ApiResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,11 +26,12 @@ public class UserRepository {
         userApi = RetrofitService.cteateService(UserApi.class);
     }
 
-    public MutableLiveData<ApiResponse> getUser(GetRequest get){
+    public MutableLiveData<ApiResponse> getUser(String no_hp, String operator){
         MutableLiveData<ApiResponse> userData = new MutableLiveData<>();
         Log.d("info", "masuk getUser UserRepo ");
-        userApi.getUser(get).enqueue(new Callback<ApiResponse>() {
+        userApi.getUser(operator, no_hp).enqueue(new Callback<ApiResponse>() {
             @Override
+
             public void onResponse(Call<ApiResponse> call,
                                    Response<ApiResponse> response) {
                 if (response.isSuccessful()){
@@ -42,7 +42,7 @@ public class UserRepository {
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                Log.d("info", "masuk getUser UserRepo ");
+                Log.d("info", "hit api Failed , cause : "+t.getMessage());
                 userData.setValue(null);
             }
         });

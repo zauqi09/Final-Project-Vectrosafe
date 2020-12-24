@@ -1,4 +1,4 @@
-package com.vectrosafe.model.Response;
+package com.vectrosafe.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -15,7 +15,7 @@ public class ApiResponse {
 
     @SerializedName("data")
     @Expose
-    private NomorHP data;
+    private NomorHP data = null;
 
     public ApiResponse(){}
     public int getStatus() {

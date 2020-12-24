@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitService {
 
     private static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:9027/")
+            .baseUrl("http://10.0.2.2:9027/operatorpulsa/")
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 

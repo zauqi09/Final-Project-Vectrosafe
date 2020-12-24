@@ -78,12 +78,14 @@ public class BackEndRecv {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        break;
                     case "android_loginNasabah":
                         try {
                             dbcon.login(deliver);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+                        break;
 //                    case "android_verifyJWT":
 //                        try{
 //                            dbcon.verifyJWT(deliver);

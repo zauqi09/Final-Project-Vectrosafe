@@ -28,6 +28,7 @@ public class RestApiSend{
         }
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()) {
+
             channel.queueDeclare(declare, false, false, false, null);
             channel.basicPublish("", declare, null, sendString.getBytes(StandardCharsets.UTF_8));
         } catch (Exception e) {
