@@ -82,8 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             progressDialog.dismiss();
-            Log.d("status", userResponse.getStatus());
-            if (!userResponse.getMessage().equals("Error")){
+            if (userResponse.getStatus().equals("200")){
                 user = userResponse.getData();
                 user.setToken(userResponse.getToken());
                 //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
@@ -96,23 +95,24 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id_auth", String.valueOf(user.getId_auth()));
+                bundle.putString("username_auth", user.getUsername());
                 intent.putExtras(bundle);
                 startActivity(intent);
             } else {
-                showDialog();
+                showDialog(userResponse.getMessage());
             }
 
         });
     }
 
-    private void showDialog(){
+    private void showDialog(String msg){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 this);
 
 
         // set pesan dari dialog
         alertDialogBuilder
-                .setMessage("Login gagal")
+                .setMessage(msg)
                 .setIcon(R.mipmap.ic_launcher)
                 .setCancelable(false).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             @Override
@@ -132,9 +132,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public void onBackPressed() {
-        Intent a = new Intent(Intent.ACTION_MAIN);
-        a.addCategory(Intent.CATEGORY_HOME);
-        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(a);
+//        Intent a = new Intent(Intent.ACTION_MAIN);
+//        a.addCategory(Intent.CATEGORY_HOME);
+//        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(a);
+        System.exit(1);
     }
 }

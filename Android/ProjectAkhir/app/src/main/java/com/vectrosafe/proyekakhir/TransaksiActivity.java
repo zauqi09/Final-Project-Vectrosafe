@@ -1,5 +1,6 @@
 package com.vectrosafe.proyekakhir;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,6 +71,9 @@ public class TransaksiActivity extends AppCompatActivity {
     @BindView(R.id.submit_mutasi)
     Button submit_mutasi;
 
+    @BindView(R.id.tv_back_mutasi)
+    ImageView iv_back_mutasi;
+
     TransaksiViewModel transaksiViewModel;
 
     List<Transaksi> transaksis;
@@ -99,8 +105,10 @@ public class TransaksiActivity extends AppCompatActivity {
 
     private void initData() {
         Bundle bundle = getIntent().getExtras();
+        getIntent().setAction("Already created");
         id_nasabah=bundle.getString("id_nasabah","");
         id_auth=bundle.getString("id_auth","");
+        Log.d("id_auth", "initData: "+id_auth);
         if (transaksiAdapter == null) {
             transaksiAdapter = new TransaksiAdapter(TransaksiActivity.this, transaksiArrayList);
             rvTransaksi.setLayoutManager(new LinearLayoutManager(this));
@@ -126,14 +134,52 @@ public class TransaksiActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            progressDialog.dismiss();
-            transaksis = transaksisResponse.getData();
-            transaksiArrayList.clear();
-            transaksiArrayList.addAll(transaksis);
-            transaksiAdapter.notifyDataSetChanged();
+            if (transaksisResponse.getStatus()==200){
+                progressDialog.dismiss();
+                transaksis = transaksisResponse.getData();
+                transaksiArrayList.clear();
+                transaksiArrayList.addAll(transaksis);
+                transaksiAdapter.notifyDataSetChanged();
+            } else {
+                showDialog("Oops! Error memuat data");
+            }
+
         });
     }
+
+    private void showDialog(String msg){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage(msg)
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // do something
+                Intent intent = new Intent(TransaksiActivity.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+
     void onEventGroup(){
+        iv_back_mutasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         bt_tgl_akhir.setOnClickListener(new View.OnClickListener() {
             DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
                 @Override
@@ -229,12 +275,37 @@ public class TransaksiActivity extends AppCompatActivity {
         });
 
     }
+    protected void onResume() {
+        Log.v("Example", "onResume");
+
+        String action = getIntent().getAction();
+        // Prevent endless loop by adding a unique action, don't restart if action is present
+        if(action == null || !action.equals("Already created")) {
+            Log.v("Example", "Force restart");
+            SharedPreferences sharedPref = getSharedPreferences("com.vectrosafe.proyekakhir", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("com.vectrosafe.proyekakhir.token", "");
+            editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
+            editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.apply();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        // Remove the unique action so the next time onResume is called it will restart
+        else
+            getIntent().setAction(null);
+
+        super.onResume();
+    }
     public void onBackPressed() {
         Intent intent =
                 new Intent( TransaksiActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
+        Log.d("id_auth", "onBackPressed: "+id_auth);
         bundle.putString("id_auth", id_auth);
-        intent.putExtras(bundle);startActivity(intent);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 

@@ -2,6 +2,7 @@ package com.vectrosafe.proyekakhir;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -58,11 +60,36 @@ public class PaymentRequireActivity extends AppCompatActivity {
 
     private void initData(){
         Bundle bundle = getIntent().getExtras();
+        getIntent().setAction("Already created");
         operator =bundle.getString("operator","");
         id_nasabah =bundle.getString("id_nasabah","");
         id_produk =bundle.getString("id_produk","");
         id_auth =bundle.getString("id_auth","");
         no_hp =bundle.getString("no_hp","");
+    }
+
+    protected void onResume() {
+        Log.v("Example", "onResume");
+
+        String action = getIntent().getAction();
+        // Prevent endless loop by adding a unique action, don't restart if action is present
+        if(action == null || !action.equals("Already created")) {
+            Log.v("Example", "Force restart");
+            SharedPreferences sharedPref = getSharedPreferences("com.vectrosafe.proyekakhir", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("com.vectrosafe.proyekakhir.token", "");
+            editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
+            editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.apply();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        // Remove the unique action so the next time onResume is called it will restart
+        else
+            getIntent().setAction(null);
+
+        super.onResume();
     }
 
     private void onClickGroup(){
@@ -106,11 +133,34 @@ public class PaymentRequireActivity extends AppCompatActivity {
             } else {
                 progressDialog.dismiss();
                 System.out.println("Transaksi Gagal!");
-                Toast.makeText(this,"Error Code : "+TransaksiResponse.getStatus()+" : Oops! Transaksi gagal, silahkan cobalagi!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(PaymentRequireActivity.this, MainActivity.class);
-                startActivity(intent);
+                showDialog("Oops! Transaksi gagal, silahkan cobalagi!");
             }
         });
+    }
+
+    private void showDialog(String msg){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage(msg)
+                .setIcon(R.mipmap.ic_launcher)
+                .setCancelable(false).setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // do something
+                Intent intent = new Intent(PaymentRequireActivity.this, MainActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
     }
 
     public void onBackPressed() {
@@ -118,7 +168,8 @@ public class PaymentRequireActivity extends AppCompatActivity {
                 new Intent( PaymentRequireActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("id_auth", id_auth);
-        intent.putExtras(bundle);startActivity(intent);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 }

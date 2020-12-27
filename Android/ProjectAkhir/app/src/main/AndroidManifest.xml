@@ -14,6 +14,7 @@
         android:theme="@style/Theme.Androidloginsplash">
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".MainActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".TransaksiActivity" />
         <activity android:name=".SuccessActivity" />
         <activity android:name=".PulsaActivity" />

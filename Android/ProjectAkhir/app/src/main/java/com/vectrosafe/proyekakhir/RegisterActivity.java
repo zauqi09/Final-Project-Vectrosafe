@@ -179,11 +179,13 @@ public class RegisterActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-            String message = "Registrasi gagal";
+            String message = "";
             if (UserResponse.getStatus().equals("200")) {
                 user = UserResponse.getData();
                 progressDialog.dismiss();
                 message = "Registrasi sukses, silahkan login";
+            } else {
+                message = "Registrasi gagal";
             }
             showDialog(message);
         });

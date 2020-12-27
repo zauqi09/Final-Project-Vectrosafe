@@ -1,10 +1,14 @@
 package com.vectrosafe.proyekakhir;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -36,6 +40,10 @@ public class PulsaActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     @BindView(R.id.listpulsa)
     RecyclerView listpulsa;
+
+    @BindView(R.id.tv_back_pulsa)
+    ImageView iv_back_pulsa;
+
     ArrayList<Voucher> voucherArrayList = new ArrayList<>();
     List<Voucher> vouchers;
     @Override
@@ -59,6 +67,7 @@ public class PulsaActivity extends AppCompatActivity {
 
     void initData(){
         Bundle bundle = getIntent().getExtras();
+        getIntent().setAction("Already created");
         id_nasabah=bundle.getString("id_nasabah","");
         id_auth=bundle.getString("id_auth","");
         if (voucherAdapter == null) {
@@ -72,8 +81,37 @@ public class PulsaActivity extends AppCompatActivity {
             voucherAdapter.notifyDataSetChanged();
         }
     }
+    protected void onResume() {
+        Log.v("Example", "onResume");
+
+        String action = getIntent().getAction();
+        // Prevent endless loop by adding a unique action, don't restart if action is present
+        if(action == null || !action.equals("Already created")) {
+            Log.v("Example", "Force restart");
+            SharedPreferences sharedPref = getSharedPreferences("com.vectrosafe.proyekakhir", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("com.vectrosafe.proyekakhir.token", "");
+            editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
+            editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.apply();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        // Remove the unique action so the next time onResume is called it will restart
+        else
+            getIntent().setAction(null);
+
+        super.onResume();
+    }
 
     void EventGroup(){
+        iv_back_pulsa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         et_no_hp.addTextChangedListener(new TextValidator(et_no_hp) {
             @Override public void validate(EditText et_nohp, String text) {
                 /* Insert your validation rules here */
@@ -149,6 +187,7 @@ public class PulsaActivity extends AppCompatActivity {
                 new Intent( PulsaActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("id_auth", id_auth);
-        intent.putExtras(bundle);startActivity(intent);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 }

@@ -2,6 +2,7 @@ package com.vectrosafe.proyekakhir;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ public class SuccessActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_success);
         ButterKnife.bind(this);
         Bundle bundle = getIntent().getExtras();
+        getIntent().setAction("Already created");
         id_auth =bundle.getString("id_auth","");
         onClickGroup();
         if (!isTaskRoot()
@@ -48,6 +50,30 @@ public class SuccessActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    protected void onResume() {
+        Log.v("Example", "onResume");
+
+        String action = getIntent().getAction();
+        // Prevent endless loop by adding a unique action, don't restart if action is present
+        if(action == null || !action.equals("Already created")) {
+            Log.v("Example", "Force restart");
+            SharedPreferences sharedPref = getSharedPreferences("com.vectrosafe.proyekakhir", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putString("com.vectrosafe.proyekakhir.token", "");
+            editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
+            editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.apply();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        // Remove the unique action so the next time onResume is called it will restart
+        else
+            getIntent().setAction(null);
+
+        super.onResume();
     }
     public void onBackPressed() {
         Intent a = new Intent(SuccessActivity.this, MainActivity.class);

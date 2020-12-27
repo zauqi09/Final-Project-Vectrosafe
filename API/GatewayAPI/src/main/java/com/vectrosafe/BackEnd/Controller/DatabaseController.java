@@ -98,7 +98,6 @@ public class DatabaseController {
         send.response_loginNasabah(sendMessage);
     }
 
-
     public void addTransaksi(String trxString) throws IOException, InterruptedException {
         //okhttpconnect();
         MediaType mediaType = MediaType.parse("application/json");

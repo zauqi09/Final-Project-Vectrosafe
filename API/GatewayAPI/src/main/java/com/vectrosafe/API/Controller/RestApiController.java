@@ -43,17 +43,17 @@ public class RestApiController {
                 } else {
                     objResponse.setStatus(404);
                     objResponse.setMessage("Get Data Fail");
-                    return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(objResponse,HttpStatus.OK);
                 }
             } else {
                 objResponse.setStatus(401);
                 objResponse.setMessage("Unauthorized");
-                return new ResponseEntity<>(objResponse,HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(objResponse,HttpStatus.OK);
             }
         } else{
             objResponse.setStatus(400);
             objResponse.setMessage("Bad Request");
-            return new ResponseEntity<>(objResponse,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
 
 
@@ -79,17 +79,17 @@ public class RestApiController {
                 }else {
                     objResponse.setStatus(404);
                     objResponse.setMessage("Not Found");
-                    return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(objResponse,HttpStatus.OK);
                 }
             }else {
                 objResponse.setStatus(401);
                 objResponse.setMessage("Unauthorized");
-                return new ResponseEntity<>(objResponse,HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(objResponse,HttpStatus.OK);
             }
         }else{
             objResponse.setStatus(400);
             objResponse.setMessage("Bad Request");
-            return new ResponseEntity<>(objResponse,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
     }
 
@@ -118,19 +118,19 @@ public class RestApiController {
                     objResponse.setStatus(404);
                     objResponse.setMessage("Not Found");
                     //objResponse.setData(new Auth());
-                    return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(objResponse,HttpStatus.OK);
                 }
             }else {
                 objResponse.setStatus(401);
                 objResponse.setMessage("Unauthorized");
                 //objResponse.setData(new Auth());
-                return new ResponseEntity<>(objResponse,HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(objResponse,HttpStatus.OK);
             }
         }else{
             objResponse.setStatus(400);
             objResponse.setMessage("Bad Request");
             //objResponse.setData(new Auth());
-            return new ResponseEntity<>(objResponse,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
     }
 
@@ -156,7 +156,7 @@ public class RestApiController {
             objResponse.setStatus(404);
             objResponse.setMessage("Not Found");
             //objResponse.setData(new Object());
-            return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
 
     }
@@ -171,8 +171,8 @@ public class RestApiController {
         System.out.println("isi Response: "+response);
         if(response.equals("Error")){
             objResponse.setStatus(404);
-            objResponse.setMessage("Not Found");
-            return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+            objResponse.setMessage("User Not Found");
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         } else {
             LoginResponse logresponse = new Gson().fromJson(response, LoginResponse.class);
             return new ResponseEntity<>(logresponse, HttpStatus.OK);
@@ -197,19 +197,19 @@ public class RestApiController {
                     objResponse.setStatus(404);
                     objResponse.setMessage("Not Found");
                     //objResponse.setData(new Nasabah());
-                    return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(objResponse,HttpStatus.OK);
                 }
             } else {
                 objResponse.setStatus(401);
                 objResponse.setMessage("Unauthorized");
                 //objResponse.setData(new Nasabah());
-                return new ResponseEntity<>(objResponse,HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(objResponse,HttpStatus.OK);
             }
         } else {
             objResponse.setStatus(400);
             objResponse.setMessage("Bad Request");
             //objResponse.setData(new Nasabah());
-            return new ResponseEntity<>(objResponse,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
 
     }
@@ -228,7 +228,7 @@ public class RestApiController {
             objResponse.setStatus(404);
             objResponse.setMessage("Not Found");
             //objResponse.setData(new Nasabah());
-            return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
     }
 
@@ -250,19 +250,19 @@ public class RestApiController {
                     objResponse.setStatus(404);
                     objResponse.setMessage("Not Found");
                     //objResponse.setData(new Object());
-                    return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+                    return new ResponseEntity<>(objResponse,HttpStatus.OK);
                 }
             } else {
                 objResponse.setStatus(401);
                 objResponse.setMessage("Unauthorized");
                 //objResponse.setData(new Object());
-                return new ResponseEntity<>(objResponse,HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(objResponse,HttpStatus.OK);
             }
         } else {
             objResponse.setStatus(400);
             objResponse.setMessage("Bad Request");
             //objResponse.setData(new Object());
-            return new ResponseEntity<>(objResponse,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
     }
 
@@ -278,7 +278,7 @@ public class RestApiController {
             ApiResponse objResponse = new ApiResponse();
             objResponse.setStatus(404);
             objResponse.setMessage("Not Found");
-            return new ResponseEntity<>(objResponse,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(objResponse,HttpStatus.OK);
         }
     }
 
