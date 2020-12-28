@@ -46,14 +46,6 @@ public class RegisterActivity extends AppCompatActivity {
         onClickGroup();
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init();
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-
-            finish();
-            return;
-        }
     }
 
     private void initView(){
@@ -172,7 +164,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void postRegister() throws ParseException {
         Date tgl_akhir_temp=new SimpleDateFormat("yyyy/MM/dd").parse(tanggal_lahir);
         userViewModel.postRegister(new RegisterRequest(username, namalengkap,password,tgl_akhir_temp, no_hp, alamat)).observe(this, UserResponse -> {
-            while (UserResponse.getData() ==null){
+            while (UserResponse==null){
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -180,12 +172,13 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
             String message = "";
-            if (UserResponse.getStatus().equals("200")) {
+            if (UserResponse.getStatus()==200) {
                 user = UserResponse.getData();
                 progressDialog.dismiss();
                 message = "Registrasi sukses, silahkan login";
             } else {
-                message = "Registrasi gagal";
+                progressDialog.dismiss();
+                message = "Registrasi gagal, akun sudah terdaftar";
             }
             showDialog(message);
         });

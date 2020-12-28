@@ -91,15 +91,6 @@ public class TransaksiActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initData();
         onEventGroup();
-
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-
-            finish();
-            return;
-        }
     }
 
 
@@ -210,7 +201,6 @@ public class TransaksiActivity extends AppCompatActivity {
                 @Override
                 public void onDateSet(DatePicker view, int year, int monthOfYear,
                                       int dayOfMonth) {
-                    // TODO Auto-generated method stub
                     myCalendar.set(Calendar.YEAR, year);
                     myCalendar.set(Calendar.MONTH, monthOfYear);
                     myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -287,6 +277,7 @@ public class TransaksiActivity extends AppCompatActivity {
             editor.putString("com.vectrosafe.proyekakhir.token", "");
             editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
             editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
             editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

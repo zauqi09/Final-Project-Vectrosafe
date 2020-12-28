@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -18,6 +19,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.material.button.MaterialButton;
 import com.vectrosafe.proyekakhir.model.Request.TransaksiRequest;
 import com.vectrosafe.proyekakhir.viewmodels.TransaksiViewModel;
+
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,9 +34,12 @@ public class PaymentRequireActivity extends AppCompatActivity {
     @BindView(R.id.bt_confirm_payment)
     MaterialButton bt_confirm_payment;
 
+    @BindView(R.id.text_produk)
+    TextView textProduk;
+
     @BindView(R.id.et_password_payment)
     EditText et_password_payment;
-    String id_produk, no_hp, id_auth;
+    String nominal, harga, id_produk, no_hp, id_auth;
     TransaksiViewModel voucherViewModel;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,17 +52,23 @@ public class PaymentRequireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_payment_requirements);
         voucherViewModel = ViewModelProviders.of(this).get(TransaksiViewModel .class);
         voucherViewModel.init();
-        initData();
         ButterKnife.bind(this);
+        initData();
         onClickGroup();
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
 
-            finish();
-            return;
-        }
+    }
+
+
+    String kursIndo(Long rp){
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        String strRp = kursIndonesia.format(rp);
+        return strRp;
     }
 
     private void initData(){
@@ -66,6 +79,10 @@ public class PaymentRequireActivity extends AppCompatActivity {
         id_produk =bundle.getString("id_produk","");
         id_auth =bundle.getString("id_auth","");
         no_hp =bundle.getString("no_hp","");
+        harga = bundle.getString("price", "");
+        nominal = bundle.getString("code", "");
+        String textprod = "Anda akan membeli pulsa "+operator+" sebesar "+nominal+" dengan harga "+kursIndo(Long.parseLong(harga));
+        textProduk.setText(textprod);
     }
 
     protected void onResume() {
@@ -80,6 +97,7 @@ public class PaymentRequireActivity extends AppCompatActivity {
             editor.putString("com.vectrosafe.proyekakhir.token", "");
             editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
             editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
             editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -127,6 +145,7 @@ public class PaymentRequireActivity extends AppCompatActivity {
                 System.out.println("Transaksi Berhasil!");
                 Intent intent = new Intent(PaymentRequireActivity.this, SuccessActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putString("id_nasabah", id_nasabah);
                 bundle.putString("id_auth", String.valueOf(id_auth));
                 intent.putExtras(bundle);
                 startActivity(intent);

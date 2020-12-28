@@ -39,18 +39,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPref = getSharedPreferences("com.vectrosafe.proyekakhir", Context.MODE_PRIVATE);
         token = sharedPref.getString("com.vectrosafe.proyekakhir.token","-");
+        username_auth = sharedPref.getString("com.vectrosafe.proyekakhir.username_auth","-");
+        id_auth = sharedPref.getString("com.vectrosafe.proyekakhir.id_auth","-");
         Log.d("token ",token);
         setTitle(token);
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         userViewModel.init();
         initViewData();
         onClickGroup();
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-            finish();
-        }
     }
 
     public void initViewData(){
@@ -128,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("com.vectrosafe.proyekakhir.token", "");
                 editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
                 editor.putString("com.vectrosafe.proyekakhir.password", "");
+                editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
                 editor.apply();
                 progressDialog.dismiss();
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -247,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("com.vectrosafe.proyekakhir.token", "");
             editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
             editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
             editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

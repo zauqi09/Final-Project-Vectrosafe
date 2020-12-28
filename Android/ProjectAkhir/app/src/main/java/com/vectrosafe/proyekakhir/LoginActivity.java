@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
             progressDialog.dismiss();
-            if (userResponse.getStatus().equals("200")){
+            if (userResponse.getStatus()==200){
                 user = userResponse.getData();
                 user.setToken(userResponse.getToken());
                 //SharedPreferences sharedPref = this.getPreferences(Context.MODE_PRIVATE);
@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("com.vectrosafe.proyekakhir.token", user.getToken());
                 editor.putString("com.vectrosafe.proyekakhir.id_auth", String.valueOf(user.getId_auth()));
+                editor.putString("com.vectrosafe.proyekakhir.username_auth", user.getUsername());
                 editor.putString("com.vectrosafe.proyekakhir.password", user.getPassword());
                 editor.apply();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -129,13 +130,42 @@ public class LoginActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-
-
     public void onBackPressed() {
-//        Intent a = new Intent(Intent.ACTION_MAIN);
-//        a.addCategory(Intent.CATEGORY_HOME);
-//        a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(a);
-        System.exit(1);
+        showDialog();
     }
+
+    private void showDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                this);
+
+        // set title dialog
+        alertDialogBuilder.setTitle("Keluar dari aplikasi?");
+
+        // set pesan dari dialog
+        alertDialogBuilder
+                .setMessage("Klik Ya untuk keluar!")
+                .setIcon(R.mipmap.ic_vectrosafe_round)
+                .setCancelable(false)
+                .setPositiveButton("Ya",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // jika tombol diklik, maka akan menutup activity ini
+                        System.exit(1);
+                    }
+                })
+                .setNegativeButton("Tidak",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // jika tombol ini diklik, akan menutup dialog
+                        // dan tidak terjadi apa2
+                        dialog.cancel();
+                    }
+                });
+
+        // membuat alert dialog dari builder
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // menampilkan alert dialog
+        alertDialog.show();
+    }
+
+
 }

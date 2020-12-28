@@ -18,6 +18,8 @@ import com.vectrosafe.proyekakhir.PaymentRequireActivity;
 import com.vectrosafe.proyekakhir.R;
 import com.vectrosafe.proyekakhir.model.Voucher;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -48,9 +50,23 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.ProductV
         return new  ProductViewHolder(view);
     }
 
+    String kursIndo(Long rp){
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        String strRp = kursIndonesia.format(rp);
+        return strRp;
+    }
+
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
         holder.nominalTextView.setText(String.valueOf(products.get(position).getNama_produk()));
+
+        holder.hargaTextView.setText("Harga : "+kursIndo(products.get(position).getHarga_produk()));
         Log.d("nominal", "onBindViewHolder: "+ products.get(position).getNama_produk());holder.productRl.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -61,6 +77,7 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.ProductV
                 bundle.putString("no_hp", no_hp);
                 bundle.putString("operator", products.get(position).getOperator());
                 bundle.putString("id_auth", id_auth);
+                Log.d("id_nasabah", "onClick: "+id_nasabah);
                 bundle.putString("id_nasabah", id_nasabah);
                 bundle.putString("id_produk", products.get(position).getId_produk().toString());
                 bundle.putString("code", products.get(position).getNama_produk());
@@ -81,6 +98,8 @@ public class VoucherAdapter extends RecyclerView.Adapter<VoucherAdapter.ProductV
     public class ProductViewHolder extends RecyclerView.ViewHolder{
         @BindView(R.id.nominalTextView)
         TextView nominalTextView;
+        @BindView(R.id.HargaTextView)
+        TextView hargaTextView;
         @BindView(R.id.nominalRl)
         RelativeLayout productRl;
         public ProductViewHolder(@NonNull View itemView) {

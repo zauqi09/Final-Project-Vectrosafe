@@ -7,7 +7,7 @@ import com.vectrosafe.proyekakhir.model.User;
 public class UserResponse {
     @SerializedName("status")
     @Expose
-    private String status;
+    private int status;
 
     @SerializedName("message")
     @Expose
@@ -21,11 +21,11 @@ public class UserResponse {
     @Expose
     private String token;
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 

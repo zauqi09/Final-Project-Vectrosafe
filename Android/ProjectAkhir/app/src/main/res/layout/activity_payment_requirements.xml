@@ -24,9 +24,19 @@
        android:layout_height="wrap_content"
        android:layout_centerInParent="true">
         <TextView
+            android:id="@+id/text_produk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="null"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"
+            android:layout_centerHorizontal="true"/>
+        <TextView
             android:id="@+id/text_warning_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/text_produk"
             android:text="Silahkan masukkan password anda"
             android:textSize="18sp"
             android:layout_marginBottom="20dp"

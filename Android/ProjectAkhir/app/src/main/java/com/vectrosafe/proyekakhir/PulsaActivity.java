@@ -55,20 +55,13 @@ public class PulsaActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initData();
         EventGroup();
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-
-            finish();
-            return;
-        }
     }
 
     void initData(){
         Bundle bundle = getIntent().getExtras();
         getIntent().setAction("Already created");
         id_nasabah=bundle.getString("id_nasabah","");
+        Log.d("id_nasabah", "initData: "+id_nasabah);
         id_auth=bundle.getString("id_auth","");
         if (voucherAdapter == null) {
             voucherAdapter = new VoucherAdapter(PulsaActivity.this, voucherArrayList);
@@ -93,6 +86,7 @@ public class PulsaActivity extends AppCompatActivity {
             editor.putString("com.vectrosafe.proyekakhir.token", "");
             editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
             editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
             editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -187,6 +181,7 @@ public class PulsaActivity extends AppCompatActivity {
                 new Intent( PulsaActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("id_auth", id_auth);
+        bundle.putString("id_nasabah", id_nasabah);
         intent.putExtras(bundle);
         startActivity(intent);
     }

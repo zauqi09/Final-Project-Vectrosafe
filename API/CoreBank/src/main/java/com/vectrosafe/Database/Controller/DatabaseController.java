@@ -74,6 +74,7 @@ public class DatabaseController {
         Long id_nasabah = trx.getId_nasabah();
         Date fromdate = trx.getFromDate();
         Date todate = trx.getToDate();
+        todate.setTime(todate.getTime()+8639903L);
         System.out.println(id_nasabah);
         System.out.println(fromdate);
         System.out.println(todate);

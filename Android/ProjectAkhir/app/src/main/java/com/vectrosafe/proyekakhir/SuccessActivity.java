@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SuccessActivity extends AppCompatActivity {
-    String id_auth;
+    String id_auth, id_nasabah;
     @BindView(R.id.bt_confirm_payment)
     MaterialButton bt_back;
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +28,8 @@ public class SuccessActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         getIntent().setAction("Already created");
         id_auth =bundle.getString("id_auth","");
+        id_nasabah =bundle.getString("id_nasabah","");
         onClickGroup();
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-
-            finish();
-            return;
-        }
     }
 
     private void onClickGroup() {
@@ -46,6 +39,8 @@ public class SuccessActivity extends AppCompatActivity {
                 Intent intent = new Intent(SuccessActivity.this, MainActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("id_auth", String.valueOf(id_auth));
+                Log.d("id_nasabah", "onClick: "+id_nasabah);
+                bundle.putString("id_nasabah", id_nasabah);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -64,6 +59,7 @@ public class SuccessActivity extends AppCompatActivity {
             editor.putString("com.vectrosafe.proyekakhir.token", "");
             editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
             editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
             editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -79,6 +75,7 @@ public class SuccessActivity extends AppCompatActivity {
         Intent a = new Intent(SuccessActivity.this, MainActivity.class);
         Bundle bundle = new Bundle();
         bundle.putString("id_auth", id_auth);
+        bundle.putString("id_nasabah", id_nasabah);
         a.putExtras(bundle);
         startActivity(a);
     }

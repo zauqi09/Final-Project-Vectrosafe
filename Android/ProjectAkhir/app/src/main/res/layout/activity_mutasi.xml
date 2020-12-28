@@ -113,25 +113,28 @@
 
             <LinearLayout
                 android:id="@+id/Ll_date"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_history_transaksi"
+                android:layout_below="@+id/view_cyan"
                 android:orientation="horizontal">
                 <EditText
                     android:id="@+id/et_tgl_awal"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
+                    android:textSize="11sp"
                     android:inputType="number"
                     android:hint="Tanggal awal" />
                 <Button
                     android:id="@+id/bt_tglawal"
                     android:text="Tanggal"
                     android:layout_marginLeft="5dp"
+                    android:textSize="11sp"
                     android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/round_bg"
                     app:backgroundTint="#00BCD4"
                     android:layout_marginBottom="5dp"/>
@@ -146,7 +149,8 @@
                 <EditText
                     android:id="@+id/et_tgl_akhir"
                     android:layout_width="200dp"
-                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:inputType="number"
@@ -154,10 +158,11 @@
                 <Button
                     android:id="@+id/bt_tgl_akhir"
                     android:text="Tanggal"
+                    android:textSize="11sp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:background="@drawable/round_bg"
                     app:backgroundTint="#00BCD4"
                     android:layout_marginBottom="5dp"/>
@@ -172,6 +177,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/round_bg"
                 app:backgroundTint="#00BCD4"
+                android:textSize="11sp"
                 android:layout_marginBottom="5dp"/>
             <LinearLayout
                 android:id="@+id/transaksiL2"
@@ -242,6 +248,7 @@
                 android:layout_marginRight="9dp"
                 android:layout_marginTop="2dp"
                 android:layout_marginBottom="60dp"
+                android:verticalScrollbarPosition="right"
                 android:layout_below="@+id/transaksiL2"
                 />
 

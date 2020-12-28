@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         userViewModel.init();
         sharedPref = getSharedPreferences("com.vectrosafe.proyekakhir", Context.MODE_PRIVATE);
         token = "Bearer "+sharedPref.getString("com.vectrosafe.proyekakhir.token","-");
+        username_auth = sharedPref.getString("com.vectrosafe.proyekakhir.username_auth","-");
         ButterKnife.bind(this);
         initViewData();
         onClickGroup();
@@ -96,6 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                 editor.putString("com.vectrosafe.proyekakhir.token", "");
                 editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
                 editor.putString("com.vectrosafe.proyekakhir.password", "");
+                editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
                 editor.apply();
                 progressDialog.dismiss();
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
@@ -120,7 +122,6 @@ public class ProfileActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         getIntent().setAction("Already created");
         id_auth=bundle.getString("id_auth","");
-        username_auth=bundle.getString("username_auth","");
         nama_nasabah=bundle.getString("nama_nasabah","");
         no_hp=bundle.getString("no_hp_nasabah","");
         no_rek=bundle.getString("no_rek_nasabah","");
@@ -154,6 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
             editor.putString("com.vectrosafe.proyekakhir.token", "");
             editor.putString("com.vectrosafe.proyekakhir.id_auth", "");
             editor.putString("com.vectrosafe.proyekakhir.password", "");
+            editor.putString("com.vectrosafe.proyekakhir.username_auth", "");
             editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

@@ -2,20 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/nominalRl"
     android:layout_width="match_parent"
-    android:layout_height="71dp"
+    android:layout_height="91dp"
     android:orientation="horizontal"
     android:background="@drawable/bg_strokes">
-    <TextView
-        android:id="@+id/nominalTextView"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="1dp"
-        android:singleLine="true"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="nominal"
-        android:textSize="20sp"
-        />
+        android:layout_centerInParent="true">
+        <TextView
+            android:id="@+id/nominalTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:singleLine="true"
+            android:layout_centerHorizontal="true"
+            android:text="nominal"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/HargaTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="1dp"
+            android:singleLine="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/nominalTextView"
+            android:text="harga"
+            android:textSize="10sp"
+            />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>
