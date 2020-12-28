@@ -70,12 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initViewData();
         onClickGroup();
-        if (!isTaskRoot()
-                && getIntent().hasCategory(Intent.CATEGORY_LAUNCHER)
-                && getIntent().getAction() != null
-                && getIntent().getAction().equals(Intent.ACTION_MAIN)) {
-            finish();
-        }
+
     }
 
     void onClickGroup(){

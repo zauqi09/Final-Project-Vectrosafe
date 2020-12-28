@@ -3,8 +3,8 @@ package com.vectrosafe.proyekakhir.model;
 import java.util.Date;
 
 public class Nasabah {
-    private Long id_nasabah;
-    private Long id_auth;
+    private int id_nasabah;
+    private int id_auth;
     private String nama_lengkap;
     private Date tgl_lahir;
     private Long saldo;
@@ -14,11 +14,20 @@ public class Nasabah {
 
     public Nasabah(){}
 
-    public Long getId_auth() {
+
+    public int getId_nasabah() {
+        return id_nasabah;
+    }
+
+    public void setId_nasabah(int id_nasabah) {
+        this.id_nasabah = id_nasabah;
+    }
+
+    public int getId_auth() {
         return id_auth;
     }
 
-    public void setId_auth(Long id_auth) {
+    public void setId_auth(int id_auth) {
         this.id_auth = id_auth;
     }
 
@@ -68,13 +77,5 @@ public class Nasabah {
 
     public void setNo_rekening(String no_rekening) {
         this.no_rekening = no_rekening;
-    }
-
-    public Long getId_nasabah() {
-        return id_nasabah;
-    }
-
-    public void setId_nasabah(Long id_nasabah) {
-        this.id_nasabah = id_nasabah;
     }
 }

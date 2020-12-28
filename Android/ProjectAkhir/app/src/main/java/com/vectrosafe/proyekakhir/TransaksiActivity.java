@@ -153,7 +153,6 @@ public class TransaksiActivity extends AppCompatActivity {
                 // do something
                 Intent intent = new Intent(TransaksiActivity.this, MainActivity.class);
                 startActivity(intent);
-
             }
         });
 
